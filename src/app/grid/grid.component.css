@@ -1,0 +1,96 @@
+.grid-canvas{
+    border: 5px solid black;
+    display: flex;
+    border-radius: 8px;
+    /* margin-top: -10px; */
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.canvas{
+    /* margin: 20px; */
+    /* margin-top: -50px; */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.buttons{
+    top: -85px;
+    right: 500px;
+    position: relative;
+}
+
+button:hover{
+    border: 2px solid black;
+}
+
+.start{
+    background-color: lightgreen;
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+.reset{
+    background-color: red;
+    border-radius: 5px;
+}
+.random{
+    background-color: lightblue;
+    border-radius: 5px;
+    margin: 5px;
+}
+.rainbow{
+    border-radius: 5px;
+    width: 120px;
+}
+
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+}
+
+mat-toolbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.opt-buttons{
+    padding: 5px;
+    position: relative;
+    /* border: 3px solid black; */
+    width: 250px;
+    justify-content: center;
+    align-items: center;
+    /* max-width: 100%; */
+}
+.options{
+    position: relative;
+    /* height: 400px; */
+    left: -150px;
+    outline: 3px solid black;
+    box-shadow: 0 10px 15px black;
+    border-radius: 8px;
+
+}
+input{
+    padding: 1px;
+    margin: 10px;
+}
+label{
+    margin: 2px;
+    padding: 3px;
+}
+button{
+    padding: 5px;
+    margin: 5px;
+    font-size: 14px;
+}

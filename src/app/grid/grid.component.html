@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="buttons"> 
+        <button class="start" mat-button (click)="runDijkstra()">
+            Start
+          </button>
+        <button class="reset" mat-button (click)="reset()">
+          Reset
+        </button>
+        <button class="random" mat-button (click)="randomize()">
+          Random Layout
+        </button>
+        <button class="rainbow" mat-button (click)="rainbowToggle()"
+            [ngStyle]="{
+              'background-color' : rainbow ? 'pink' : 'yellow',
+              'color' : rainbow ? 'white' : 'black'
+              }">
+            {{ rainbow ? 'Regular Colors' : 'Random Colors' }}
+        </button>
+      </div>
+<!-- </mat-toolbar> -->
+  <div class="body">
+    <div class="options">
+      <div class="opt-buttons">
+        <div class="visit">
+        <input type="color" id="visited" name="node"
+            value="#ffff00">
+        <label for="visited">Visited Node Color</label>
+        </div>
+        <div class="path">
+        <input type="color" id="Path" name="path"
+            value="#ff00fb">
+        <label for="path">Path Color</label>
+        </div>
+      </div>
+      <!-- <div class="slider-div">
+      Pathfinding Speed 
+      <mat-slider class="slider" min="1" max="100" step="1" showTickMarks discrete [displayWith]="delayChange">
+        <input matSliderThumb>
+      </mat-slider>
+      </div> -->
+    </div>
+    <div class="canvas">
+        <canvas class= "grid-canvas" #canvas tabindex="0" (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)"></canvas>
+    </div>
+  </div>
+</div>

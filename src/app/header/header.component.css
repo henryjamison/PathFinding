@@ -1,0 +1,42 @@
+.container{
+    background-color: black;
+    color:white;
+    margin: 0px;
+    padding: 0px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
+
+}
+div{
+    color: white;
+    margin: 10px;
+
+}
+
+a:hover{
+    color: yellow;
+}
+a{
+    margin: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+
+}
+
+h1{
+    font-size: 50px;
+}
+
+
+.links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* left: -50px; */
+    position: relative;
+}

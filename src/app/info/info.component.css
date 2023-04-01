@@ -1,0 +1,89 @@
+/* .how-to{
+    border: 3px solid black;
+
+}
+
+.how-to-div{
+    margin: 50px;
+    top: -100px;
+    position: relative;
+
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.text{
+    border: 1px solid black;
+    height: 600px;
+    width: 500px;
+    margin: 50px;
+    padding: 30px;
+    left: -120px;
+    position: relative;
+
+} */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .text {
+    border: 2px solid #ddd;
+    position: relative;
+    padding: 30px;
+    left: -150px;
+    top: 10px;
+    max-width: 500px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .start {
+    color: green;
+  }
+  
+  .end {
+    color: red;
+  }
+
+  .how-to-div {
+    /* right: -150px; */
+    top: -20px;
+    position: relative;
+
+  }
+  .path-div{
+    bottom: -20px;
+    position: relative;
+
+  }
+  .path{
+    border: 3px solid black;
+    max-width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .how-to {
+    border: 3px solid black;
+    max-width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  .gifs{
+    position: relative;
+    right: -100px;
+  }
