@@ -1,0 +1,1 @@
+body{margin:0;overscroll-behavior:auto;background:var(--color-bg-header);height:100%;display:flex}app-root{height:100%;display:flex;flex-direction:column;flex:1}app-footer{margin-top:auto}html{height:100%}
