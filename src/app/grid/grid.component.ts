@@ -111,7 +111,6 @@ export class GridComponent implements OnInit{
   const col = Math.floor(event.offsetX / this.cellWidth);
   const row = Math.floor(event.offsetY / this.cellHeight);
   const node = this.nodes[row][col];
-  console.log("MOUSE DOWN", node);
 
   // check if click is within start node, without this, anywhere the user clicks
   // the start/end node moves to that box.
@@ -141,7 +140,6 @@ export class GridComponent implements OnInit{
       const row = Math.floor(event.offsetY / this.cellHeight);
       const currNode = this.nodes[row][col];
       // console.log(currNode);
-      // console.log(currNode.row,currNode.col, currNode.isEnd, currNode.isStart, currNode.isWall);
       //start - 500, 300 -> 501,301
       if (this.isDragging) {
         // update the position of the dragged node by gathering info about the current state
@@ -163,16 +161,6 @@ export class GridComponent implements OnInit{
        else if (this.isDrawing && this.endNode != currNode && this.startNode != currNode && this.draggingNode == null) {
           this.createWall(currNode);
       }
-      // else if(this.isDrawing && currNode.isWall && this.draggingNode == null){
-      //   console.log("HELLO");
-      //   const prevLocation = currNode
-      //   this.clearNode(prevLocation);
-      //   currNode.isWall = false;
-      //   // const col = Math.floor(event.offsetX / this.cellWidth);
-      //   // const row = Math.floor(event.offsetY / this.cellHeight);
-      //   // const node = this.nodes[row][col];
-      //   // this.createWall(node);
-      // }
       this.drawGraph();
     }
     catch(e){}
@@ -230,12 +218,13 @@ export class GridComponent implements OnInit{
 
   private createWall(node: Node){
     node.isWall = true;
+    node.isEnd = false;
     this.drawNode(node, 'black');
   }
 
   async runDijkstra() {
     const visitedNodeColor = this.visitedNodeColorInput.value;
-    console.log(this.startNode, this.endNode);
+    // console.log(this.startNode, this.endNode);
     if (this.startNode == undefined || this.endNode == undefined){
         this.reset();
         return;
@@ -257,20 +246,18 @@ export class GridComponent implements OnInit{
           // this.drawNode(closestNode,'yellow');
           this.drawNode(closestNode,visitedNodeColor);
         }
-        // console.log(closestNode);
       }
-      // if (closestNode.isWall){
-      //   console.log("Break");
-      //   break;
-      // }
       if (closestNode.distance == Infinity) {
         break;
       }
       if(!closestNode.isStart && !closestNode.isEnd){
         closestNode.isVisited = true;
       }
-      if (closestNode == this.endNode) {
+      if (closestNode.isEnd || closestNode.col == this.endNode.col && closestNode.row == this.endNode.row) {
+        closestNode.isEnd = true;
+        this.endNode = closestNode;
         this.getShortestPath();
+        this.createEndNode(closestNode);
         return;
       }
       this.updateUnvisitedNeighbors(closestNode);
@@ -337,9 +324,10 @@ export class GridComponent implements OnInit{
   getShortestPath() {
     const path: Node[] = [];
     let currentNode: Node | null = this.endNode;
-    while (currentNode !== null) {
+    while (currentNode != null) {
       path.unshift(currentNode);
       currentNode = currentNode.previousNode;
+      console.log(path);
     }
     this.drawShortestPath(path);
   }
@@ -347,10 +335,10 @@ export class GridComponent implements OnInit{
 
   async drawShortestPath(path: Node[]) {
     const pathColor = this.pathColorInput.value;
+    console.log(path);
     {for (let i = 0; i < path.length - 1; i++) {
       const node = path[i + 1];
       if(node != this.endNode){
-        console.log(this.rainbow);
         if (this.rainbow){
           // await new Promise(resolve => setTimeout(resolve, this.delayTime));
           await new Promise(resolve => setTimeout(resolve, 10));
@@ -361,7 +349,6 @@ export class GridComponent implements OnInit{
           await new Promise(resolve => setTimeout(resolve, 10));
           // this.drawNode(node,'#ff00fb');
           this.drawNode(node,pathColor);
-
         }
 
       }
@@ -392,6 +379,8 @@ export class GridComponent implements OnInit{
       let endCol = Math.floor(Math.random() * this.numCols);
       let start = this.nodes[startRow][startCol];
       let end = this.nodes[endRow][endCol];
+      end.isEnd = true;
+      start.isStart = true;
       this.createEndNode(end);
       this.createStartNode(start);
       console.log(start,end);
@@ -417,10 +406,10 @@ export class GridComponent implements OnInit{
         this.ctx.strokeStyle = '#ccc';
         this.ctx.stroke();
         let rand = Math.random();
-        if(node.isEnd){
+        if(node.isEnd || node.isStart){
           console.log(node);
         }
-          if (rand < 0.35 && !node.isEnd && !node.isStart && node.col != this.endNode.col && node.row != this.endNode.row
+          if (rand < 0.35 && !node.isEnd && !node.isStart && node.col != this.startNode.col && node.row != this.startNode.row
             && node.row != this.endNode.row && node.col != this.endNode.col) {
             this.createWall(node);
           }

@@ -1,5 +1,20 @@
 <div class="container">
-    <div class="buttons"> 
+  <div class="body">
+    <div class="options">
+      <div class="opt-buttons">
+        <div class="visit">
+        <input type="color" id="visited" name="node"
+            value="#ffff00">
+        <label for="visited">Visited Node Color</label>
+        </div>
+        <div class="path">
+        <input type="color" id="Path" name="path"
+            value="#ff00fb">
+        <label for="path">Path Color</label>
+        </div>
+        
+      </div>
+      <div class="buttons"> 
         <button class="start" mat-button (click)="runDijkstra()">
             Start
           </button>
@@ -16,21 +31,6 @@
               }">
             {{ rainbow ? 'Regular Colors' : 'Random Colors' }}
         </button>
-      </div>
-<!-- </mat-toolbar> -->
-  <div class="body">
-    <div class="options">
-      <div class="opt-buttons">
-        <div class="visit">
-        <input type="color" id="visited" name="node"
-            value="#ffff00">
-        <label for="visited">Visited Node Color</label>
-        </div>
-        <div class="path">
-        <input type="color" id="Path" name="path"
-            value="#ff00fb">
-        <label for="path">Path Color</label>
-        </div>
       </div>
       <!-- <div class="slider-div">
       Pathfinding Speed 
