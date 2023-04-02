@@ -34,12 +34,15 @@ export class GridComponent implements OnInit{
   private numCols = 40;
   private cellWidth = 20;
   private cellHeight = 20;
-  private draggingNode: 'start' | 'end' | null = null;
+  private draggingNode: 'start' | 'end' | 'clear' | null = null;
   private isDrawing = false;
   private isDragging = false;
   private failed = false;
   private pathColorInput!: HTMLInputElement;
   private visitedNodeColorInput!: HTMLInputElement;
+  private visitedNodeColor = '#ffff00';
+  private pathColor = '#ff00fb';
+
   rainbow = false;
   delayTime = 1;
   resetColor = false;
@@ -111,7 +114,7 @@ export class GridComponent implements OnInit{
   const col = Math.floor(event.offsetX / this.cellWidth);
   const row = Math.floor(event.offsetY / this.cellHeight);
   const node = this.nodes[row][col];
-
+  console.log(node);
   // check if click is within start node, without this, anywhere the user clicks
   // the start/end node moves to that box.
   if (node == this.startNode) {
@@ -120,18 +123,26 @@ export class GridComponent implements OnInit{
     this.draggingNode = 'start';
     return;
   }
-
   // check if click is within end node
-  if (node == this.endNode) {
+  else if (node == this.endNode) {
     this.isDragging = true;
     this.isDrawing = false;
     this.draggingNode = 'end';
     return;
   }
+  else if (!node.isWall){
     this.isDragging = false;
     this.isDrawing = true;
     this.draggingNode = null;
     this.createWall(node);
+  }
+  else{
+    this.isDragging = false;
+    this.isDrawing = true;
+    this.draggingNode = 'clear';
+    this.clearNode(node);
+    return;
+  }
 }
 
   onMouseMove(event: MouseEvent) {
@@ -160,6 +171,10 @@ export class GridComponent implements OnInit{
     
        else if (this.isDrawing && this.endNode != currNode && this.startNode != currNode && this.draggingNode == null) {
           this.createWall(currNode);
+      }
+      else if (this.isDrawing && this.draggingNode == 'clear' && currNode != this.startNode && currNode != this.endNode){
+        console.log("hi");
+        this.clearNode(currNode);
       }
       this.drawGraph();
     }
@@ -223,7 +238,9 @@ export class GridComponent implements OnInit{
   }
 
   async runDijkstra() {
-    const visitedNodeColor = this.visitedNodeColorInput.value;
+
+    this.visitedNodeColor = this.visitedNodeColorInput.value;
+    console.log(this.visitedNodeColor);
     // console.log(this.startNode, this.endNode);
     if (this.startNode == undefined || this.endNode == undefined){
         this.reset();
@@ -244,7 +261,7 @@ export class GridComponent implements OnInit{
           // await new Promise(resolve => setTimeout(resolve, this.delayTime));
           await new Promise(resolve => setTimeout(resolve, 5));
           // this.drawNode(closestNode,'yellow');
-          this.drawNode(closestNode,visitedNodeColor);
+          this.drawNode(closestNode,this.visitedNodeColor);
         }
       }
       if (closestNode.distance == Infinity) {
@@ -334,27 +351,20 @@ export class GridComponent implements OnInit{
   
 
   async drawShortestPath(path: Node[]) {
-    const pathColor = this.pathColorInput.value;
+    this.pathColor = this.pathColorInput.value;
     console.log(path);
     {for (let i = 0; i < path.length - 1; i++) {
       const node = path[i + 1];
       if(node != this.endNode){
-        if (this.rainbow){
-          // await new Promise(resolve => setTimeout(resolve, this.delayTime));
           await new Promise(resolve => setTimeout(resolve, 10));
-          this.drawNode(node,'white');
-        }
-        else{
-          // await new Promise(resolve => setTimeout(resolve, this.delayTime));
-          await new Promise(resolve => setTimeout(resolve, 10));
-          // this.drawNode(node,'#ff00fb');
-          this.drawNode(node,pathColor);
+          this.drawNode(node,this.pathColor);
         }
 
       }
     }
-    this.ctx.stroke();}
-  }
+    this.ctx.stroke();
+    }
+  // }
   
   reset(){
     try{
@@ -385,8 +395,13 @@ export class GridComponent implements OnInit{
       this.createStartNode(start);
       console.log(start,end);
       if(this.resetColor){
-      this.visitedNodeColorInput.value = '#ffff00';
-      this.pathColorInput.value = '#ff00fb';
+        if(this.rainbow){
+          this.pathColorInput.value = '#ffffff';
+        }
+        else{
+          this.visitedNodeColorInput.value = '#ffff00';
+          this.pathColorInput.value = '#ff00fb';
+        }
       }
       this.resetColor = true;
     }

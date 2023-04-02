@@ -6,6 +6,7 @@
         <input type="color" id="visited" name="node"
             value="#ffff00">
         <label for="visited">Visited Node Color</label>
+        <div class="cover" *ngIf="rainbow"></div>
         </div>
         <div class="path">
         <input type="color" id="Path" name="path"
@@ -27,7 +28,8 @@
         <button class="rainbow" mat-button (click)="rainbowToggle()"
             [ngStyle]="{
               'background-color' : rainbow ? 'pink' : 'yellow',
-              'color' : rainbow ? 'white' : 'black'
+              'color' : rainbow ? 'rgb(147, 0, 24)' : 'rgb(103, 103, 0)',
+              'border': rainbow ? '3px solid rgb(147, 0, 24)' : '3px solid rgb(103, 103, 0)'
               }">
             {{ rainbow ? 'Regular Colors' : 'Random Colors' }}
         </button>
