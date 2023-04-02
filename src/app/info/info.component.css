@@ -1,33 +1,7 @@
-/* .how-to{
-    border: 3px solid black;
-
-}
-
-.how-to-div{
-    margin: 50px;
-    top: -100px;
-    position: relative;
-
-}
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-.text{
-    border: 1px solid black;
-    height: 600px;
-    width: 500px;
-    margin: 50px;
-    padding: 30px;
-    left: -120px;
-    position: relative;
-
-} */
 .container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     flex-direction: row;
     padding-bottom: 30px;
@@ -38,7 +12,7 @@
     border: 2px solid #ddd;
     position: relative;
     padding: 30px;
-    left: -150px;
+    /* left: -150px; */
     top: 10px;
     max-width: 500px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -64,14 +38,16 @@
   }
 
   .how-to-div {
+    margin: 20px;
     /* right: -150px; */
-    top: -20px;
-    position: relative;
+    /* top: -20px; */
+    /* position: relative; */
 
   }
   .path-div{
-    bottom: -20px;
-    position: relative;
+    margin: 20px;
+    /* bottom: -20px; */
+    /* position: relative; */
 
   }
   .path{
@@ -86,6 +62,10 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
   .gifs{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     position: relative;
-    right: -100px;
+    margin-left: 100px;
+    /* right: -100px; */
   }
