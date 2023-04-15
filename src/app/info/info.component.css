@@ -21,20 +21,25 @@
   h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
   }
   
   p {
     font-size: 1.25rem;
+    font-weight: 00;
     line-height: 1.5;
     margin-bottom: 20px;
+    font-family: 'Quicksand', sans-serif;
   }
   
   .start {
     color: green;
+    font-weight: bold;
   }
   
   .end {
     color: red;
+    font-weight: bold;
   }
 
   .how-to-div {
