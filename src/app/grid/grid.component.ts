@@ -83,8 +83,8 @@ export class GridComponent implements OnInit{
       const currentRow: Node[] = [];
       for (let col = 0; col < this.numCols; col++) {
         const node: Node = {
-          row,
-          col,
+          row: row,
+          col: col,
           isStart: false,
           isEnd: false,
           distance: Infinity,
@@ -424,8 +424,8 @@ export class GridComponent implements OnInit{
         if(node.isEnd || node.isStart){
           console.log(node);
         }
-          if (rand < 0.35 && !node.isEnd && !node.isStart && node.col != this.startNode.col && node.row != this.startNode.row
-            && node.row != this.endNode.row && node.col != this.endNode.col) {
+        if (rand < 0.35 && !node.isEnd && !node.isStart && this.nodes[row][col] != this.nodes[this.startNode.row][this.startNode.col]
+          && this.nodes[row][col] != this.nodes[this.endNode.row][this.endNode.col]) {
             this.createWall(node);
           }
       }

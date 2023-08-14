@@ -16,16 +16,16 @@
         
       </div>
       <div class="buttons"> 
-        <button class="start" mat-button (click)="runDijkstra()">
+        <button class="btn start" mat-button (click)="runDijkstra()">
             Start
           </button>
-        <button class="reset" mat-button (click)="reset()">
+        <button class="btn reset" mat-button (click)="reset()">
           Reset
         </button>
-        <button class="random" mat-button (click)="randomize()">
+        <button class="btn random" mat-button (click)="randomize()">
           Random Layout
         </button>
-        <button class="rainbow" mat-button (click)="rainbowToggle()"
+        <button class="btn rainbow" mat-button (click)="rainbowToggle()"
             [ngStyle]="{
               'background-color' : rainbow ? 'pink' : 'yellow',
               'color' : rainbow ? 'rgb(147, 0, 24)' : 'rgb(103, 103, 0)',
