@@ -61,8 +61,6 @@ export class GridComponent implements OnInit{
     this.pathColorInput = document.getElementById('Path') as HTMLInputElement;
     const containerHeight = this.canvas.nativeElement.parentElement.clientHeight;
     const canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 4);
-    this.ctx.canvas.width = this.cellWidth * this.numCols;
-    this.ctx.canvas.height = this.cellHeight * this.numRows;
     this.canvas.nativeElement.height = canvasHeight;
     this.numRows = Math.floor(canvasHeight / this.cellHeight);
     this.createGraph();
@@ -237,6 +235,7 @@ export class GridComponent implements OnInit{
     this.drawNode(node, 'black');
   }
 
+  // Main runner
   async runDijkstra() {
 
     this.visitedNodeColor = this.visitedNodeColorInput.value;
@@ -287,6 +286,7 @@ export class GridComponent implements OnInit{
   }
 
 
+  // Makes an Array of all Nodes in Grid.
   getAllNodes() : Node[] {
     const nodes: Node[] = [];
     for (let row = 0; row < this.numRows; row++) {
@@ -298,10 +298,12 @@ export class GridComponent implements OnInit{
   
   }
 
+  // Sorts Nodes by Distance to determine path
   sortNodesByDistance(nodes: Node[]) {
       nodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
 }
 
+  // Updates the unvisited neighbors
   updateUnvisitedNeighbors(node: Node) {
     const unvisitedNeighbors = this.getUnvisitedNeighbors(node);
     for (const neighbor of unvisitedNeighbors) {
@@ -314,6 +316,7 @@ export class GridComponent implements OnInit{
     this.drawGraph();
   }
 
+  // Returns all surrounding nodes that arent a wall or visited given a node as a parameter
   getUnvisitedNeighbors(node: Node) {
     const neighbors: Node[] = [];
     const { col, row } = node;
@@ -332,12 +335,14 @@ export class GridComponent implements OnInit{
     return neighbors.filter(neighbor => !neighbor.isVisited && !neighbor.isWall);
   }
 
+  // Gets Distance between two nodes
   getDistance(nodeA: Node, nodeB: Node) {
     const distanceX = Math.abs(nodeA.col - nodeB.col);
     const distanceY = Math.abs(nodeA.row - nodeB.row);
     return distanceX + distanceY;
   }
 
+  // Sorted by distance, traverse the path.
   getShortestPath() {
     const path: Node[] = [];
     let currentNode: Node | null = this.endNode;
