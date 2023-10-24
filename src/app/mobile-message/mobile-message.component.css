@@ -43,13 +43,12 @@ h1{
 
 button{
     border: none;
-    width: 100px;
+    width: 175px;
     height: 50px;
     border-radius: 1em;
     background-color: red;
     color: white;
     margin: 1em;
-    /* padding: 1em; */
 }
 button:hover{
     cursor: pointer;
