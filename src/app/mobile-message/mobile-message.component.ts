@@ -14,9 +14,6 @@ export class MobileMessageComponent {
   ngOnInit() {
     const dismissed = sessionStorage.getItem('dismissedMobileMessage');
     if (dismissed) {
-      // The user has chosen not to see the message again, so close the dialog.
-      // You can do this using Angular Material Dialog or your preferred dialog library.
-      // Example:
       this.dialogRef.close();
     }
   }
