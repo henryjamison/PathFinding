@@ -12,14 +12,12 @@
     justify-content: center;
     align-items: center;
     /* position: sticky; */
-
 }
 div{
     color: white;
     margin: 10px;
 
 }
-
 a:hover{
     /* font-size: 36px; */
     /* border: 1px solid black; */
@@ -36,21 +34,21 @@ a{
     padding: 10px;
 
 }
-
 p{
     color:black;
     font-size: 50px;
-    /* font-family: 'Quicksand', sans-serif; */
-    /* font-family: 'Roboto'; */
 
 }
-
-
 .links{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /* left: -50px; */
     position: relative;
+}
+
+@media screen and (max-width:400px){
+    .container{
+        width: 90%;
+    }
 }
