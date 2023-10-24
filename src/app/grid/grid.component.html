@@ -4,9 +4,15 @@
       <div class="opt-buttons">
         <div class="visit">
         <input type="color" id="visited" name="node"
-            value="#ffff00">
-        <label for="visited">Visited Node Color</label>
-        <div class="cover" *ngIf="rainbow"></div>
+            value="#ffff00" 
+            [ngStyle]="{
+              'display' : rainbow ? 'none' : 'block'
+              }">
+        <label for="visited"
+        [ngStyle]="{
+          'display' : rainbow ? 'none' : 'block'
+          }"
+        >Visited Node Color</label>
         </div>
         <div class="path">
         <input type="color" id="Path" name="path"

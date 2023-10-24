@@ -14,6 +14,7 @@ import { InfoComponent } from './info/info.component';
 import { HeaderComponent } from './header/header.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { FooterComponent } from './footer/footer.component';
+import { MobileMessageComponent } from './mobile-message/mobile-message.component';
 
 
 
@@ -27,6 +28,7 @@ import { FooterComponent } from './footer/footer.component';
     InfoComponent,
     HeaderComponent,
     FooterComponent,
+    MobileMessageComponent,
   ],
   imports: [
     BrowserModule,

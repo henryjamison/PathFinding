@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:ital,wght@0,300;0,500;1,500&display=swap');
+:root{
+    font-family: 'Roboto';
+}
 .container{
     display: flex;
     justify-content: center;
@@ -95,7 +99,7 @@ button{
     margin: 5px;
     font-size: 14px;
     height: auto;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto';
     font-weight: 1000;
 }
 input {
@@ -128,7 +132,7 @@ input::-moz-color-swatch {
   width: 250px;
 }
 label{
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand';
   font-weight: 1000;
 }
 @media screen and (max-width:768px){

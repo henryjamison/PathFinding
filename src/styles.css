@@ -3,7 +3,7 @@ body{
     margin: 0px;
     overscroll-behavior: auto;
     background: var(--color-bg-header);
-    height: 100%;
+    height: 100vh;
     display: flex;
 }
 
