@@ -1,1 +1,0 @@
-@import"https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:ital,wght@0,300;0,500;1,500&display=swap";:root{font-family:Roboto}body{margin:0;overscroll-behavior:auto;background:var(--color-bg-header);height:100vh;display:flex}app-header{width:100%}app-root{height:100%;display:flex;width:100%;flex-direction:column;flex:1}app-footer{margin-top:auto}html{height:100%}
