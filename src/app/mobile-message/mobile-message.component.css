@@ -40,7 +40,7 @@ h1{
     margin: 0px;
 }
 
-button {
+button{
     border: none;
     width: 100px;
     height: 50px;
@@ -49,6 +49,9 @@ button {
     color: white;
     margin: 1em;
     /* padding: 1em; */
+}
+button:hover{
+    cursor: pointer;
 }
 
 .buttons{

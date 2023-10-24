@@ -1,5 +1,7 @@
 .container {
     display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
     justify-content: center;
     padding: 30px;
 }
@@ -15,10 +17,12 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 900px;
-    margin-left: 5%;
-    margin-right: 5%;
+    /* margin-left: 5%; */
+    /* margin-right: 5%; */
 }
 .buttons {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -72,7 +76,6 @@
 }
 .opt-buttons {
     padding: 5px;
-    position: relative;
     width: 250px;
     display: flex;
     justify-content: center;
@@ -121,30 +124,18 @@ input::-moz-color-swatch {
     border-radius: 100%;
     border: 1px solid black;
 }
-.cover {
-    background-color: white;
-    position: absolute;
-    z-index: 9999;
-    right: -4px;
-    height: 50px;
-    width: 250px;
-}
-label {
-    font-family: 'Quicksand';
-    font-weight: 1000;
-}
 @media screen and (max-width:768px) {
     .body {
         display: flex;
         flex-direction: column;
     }
     .options {
+        width: 95% !important;
         margin-bottom: 10px;
         box-shadow: none;
         margin-right: 0px;
     }
     .grid-canvas {
-        width: 90% !important;
-        max-height: 450px !important;
+        max-height: 425px !important;
     }
 }

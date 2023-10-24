@@ -22,7 +22,7 @@ interface Node {
   styleUrls: ['./grid.component.css']
 })
 
-export class GridComponent implements AfterViewInit {
+export class GridComponent implements OnInit {
 
   @ViewChild('canvas', { static: true })
   canvas!: ElementRef<HTMLCanvasElement>;
@@ -35,6 +35,7 @@ export class GridComponent implements AfterViewInit {
   private numCols = 40;
   private cellWidth = 20;
   private cellHeight = 20;
+  private canvasHeight = 0;
   private draggingNode: 'start' | 'end' | 'clear' | null = null;
   private isDrawing = false;
   private isDragging = false;
@@ -51,8 +52,8 @@ export class GridComponent implements AfterViewInit {
 
   constructor(public dialog: MatDialog) { }
 
-  ngAfterViewInit() {
-  // ngOnInit() {
+  // ngAfterViewInit() {
+  ngOnInit() {
     if (this.isMobileDevice()) {
       this.displayMobileMessage();
       this.canvas.nativeElement.addEventListener('touchstart', (event) => this.onMouseDown(event));
@@ -66,9 +67,14 @@ export class GridComponent implements AfterViewInit {
       this.visitedNodeColorInput = document.getElementById('visited') as HTMLInputElement;
       this.pathColorInput = document.getElementById('Path') as HTMLInputElement;
       const containerHeight = this.canvas.nativeElement.parentElement.clientHeight;
-      const canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 4);
-      this.canvas.nativeElement.height = canvasHeight;
-      this.numRows = Math.floor(canvasHeight / this.cellHeight);
+      if (this.isMobileDevice()) {
+        this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 8);
+      }
+      else {
+        this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 4);
+      }
+      this.canvas.nativeElement.height = this.canvasHeight;
+      this.numRows = Math.floor(this.canvasHeight / this.cellHeight);
       this.createGraph();
       this.drawGraph();
       let startRow = Math.floor(Math.random() * this.numRows);
@@ -115,84 +121,95 @@ export class GridComponent implements AfterViewInit {
     }
   }
   onMouseDown(event: MouseEvent | TouchEvent) {
-    if (event instanceof MouseEvent){
-    const col = Math.floor(event.offsetX / this.cellWidth);
-    const row = Math.floor(event.offsetY / this.cellHeight);
-    const node = this.nodes[row][col];
-    // console.log(node);
-    // check if click is within start node, without this, anywhere the user clicks
-    // the start/end node moves to that box.
-    if (node == this.startNode) {
-      this.isDragging = true;
-      this.isDrawing = false;
-      this.draggingNode = 'start';
-      return;
-    }
-    // check if click is within end node
-    else if (node == this.endNode) {
-      this.isDragging = true;
-      this.isDrawing = false;
-      this.draggingNode = 'end';
-      return;
-    }
-    else if (!node.isWall) {
-      this.isDragging = false;
-      this.isDrawing = true;
-      this.draggingNode = null;
-      this.createWall(node);
-    }
-    else {
-      this.isDragging = false;
-      this.isDrawing = true;
-      this.draggingNode = 'clear';
-      this.clearNode(node);
-      return;
+    if (event instanceof MouseEvent) {
+      if (this.isMobileDevice()) {
+        console.log("MOUSE DETECHED!!");
+        event.preventDefault();
+      }
+      else {
+        const col = Math.floor(event.offsetX / this.cellWidth);
+        const row = Math.floor(event.offsetY / this.cellHeight);
+        const node = this.nodes[row][col];
+        // console.log(node);
+        // check if click is within start node, without this, anywhere the user clicks
+        // the start/end node moves to that box.
+        if (node == this.startNode) {
+          this.isDragging = true;
+          this.isDrawing = false;
+          this.draggingNode = 'start';
+          return;
+        }
+        // check if click is within end node
+        else if (node == this.endNode) {
+          this.isDragging = true;
+          this.isDrawing = false;
+          this.draggingNode = 'end';
+          return;
+        }
+        else if (!node.isWall) {
+          this.isDragging = false;
+          this.isDrawing = true;
+          this.draggingNode = null;
+          this.createWall(node);
+        }
+        else {
+          this.isDragging = false;
+          this.isDrawing = true;
+          this.draggingNode = 'clear';
+          this.clearNode(node);
+          return;
+        }
       }
     }
-    else if (event instanceof TouchEvent){
+    else if (event instanceof TouchEvent) {
       event.preventDefault();
     }
-  
+
   }
 
   onMouseMove(event: MouseEvent | TouchEvent) {
     try {
-      if(event instanceof MouseEvent){
-      const col = Math.floor(event.offsetX / this.cellWidth);
-      const row = Math.floor(event.offsetY / this.cellHeight);
-      const currNode = this.nodes[row][col];
-      // console.log(currNode);
-      //start - 500, 300 -> 501,301
-      if (this.isDragging) {
-        // update the position of the dragged node by gathering info about the current state
-        // and next state. Update previous state with white, paint next state.
-        if (this.draggingNode == 'start' && currNode != this.endNode) {
-          const prevLocation = this.nodes[this.startNode.row][this.startNode.col];
-          prevLocation.distance = Infinity;
-          this.clearNode(prevLocation);
-          this.createStartNode(currNode);
+      if (event instanceof MouseEvent) {
+        if (this.isMobileDevice()) {
+          event.preventDefault();
         }
-        else if (this.draggingNode == 'end' && currNode != this.startNode) {
-          const prevLocation = this.nodes[this.endNode.row][this.endNode.col];
-          prevLocation.distance = Infinity;
-          this.clearNode(prevLocation);
-          this.createEndNode(currNode);
-        }
-      }
+        else {
+          const col = Math.floor(event.offsetX / this.cellWidth);
+          const row = Math.floor(event.offsetY / this.cellHeight);
+          const currNode = this.nodes[row][col];
+          // console.log(currNode);
+          //start - 500, 300 -> 501,301
+          if (this.isDragging) {
+            // update the position of the dragged node by gathering info about the current state
+            // and next state. Update previous state with white, paint next state.
+            if (this.draggingNode == 'start' && currNode != this.endNode) {
+              const prevLocation = this.nodes[this.startNode.row][this.startNode.col];
+              prevLocation.distance = Infinity;
+              this.clearNode(prevLocation);
+              this.createStartNode(currNode);
+            }
+            else if (this.draggingNode == 'end' && currNode != this.startNode) {
+              const prevLocation = this.nodes[this.endNode.row][this.endNode.col];
+              prevLocation.distance = Infinity;
+              this.clearNode(prevLocation);
+              this.createEndNode(currNode);
+            }
+          }
 
-      else if (this.isDrawing && this.endNode != currNode && this.startNode != currNode && this.draggingNode == null) {
-        this.createWall(currNode);
+          else if (this.isDrawing && this.endNode != currNode && this.startNode != currNode && this.draggingNode == null) {
+            this.createWall(currNode);
+          }
+          else if (this.isDrawing && this.draggingNode == 'clear' && currNode != this.startNode && currNode != this.endNode) {
+            // console.log("hi");
+            this.clearNode(currNode);
+          }
+          this.drawGraph();
+        }
       }
-      else if (this.isDrawing && this.draggingNode == 'clear' && currNode != this.startNode && currNode != this.endNode) {
-        // console.log("hi");
-        this.clearNode(currNode);
+      else if (event instanceof TouchEvent) {
+        event.preventDefault();
       }
-      this.drawGraph();
     }
-  else if (event instanceof TouchEvent){
-    event.preventDefault();
-  }
-  }
     catch (e) { }
   }
 
