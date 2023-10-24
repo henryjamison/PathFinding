@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:ital,wght@0,300;0,500;1,500&display=swap');
+:root{
+    font-family: 'Roboto';
+}
 body{
     margin: 0px;
     overscroll-behavior: auto;
@@ -20,7 +24,3 @@ app-footer{
 html{
     height: 100%;
 }
-/* *{
-    font-family: 'Quicksand', sans-serif;
-    font-family: 'Roboto', sans-serif;
-} */
