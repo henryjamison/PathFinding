@@ -35,7 +35,7 @@ export class GridComponent implements OnInit {
   private numCols = 40;
   private cellWidth = 20;
   private cellHeight = 20;
-  private canvasHeight = 0;
+  private canvasHeight:any;
   private draggingNode: 'start' | 'end' | 'clear' | null = null;
   private isDrawing = false;
   private isDragging = false;
@@ -123,14 +123,14 @@ export class GridComponent implements OnInit {
   onMouseDown(event: MouseEvent | TouchEvent) {
     if (event instanceof MouseEvent) {
       if (this.isMobileDevice()) {
-        console.log("MOUSE DETECHED!!");
         event.preventDefault();
       }
       else {
         const col = Math.floor(event.offsetX / this.cellWidth);
         const row = Math.floor(event.offsetY / this.cellHeight);
         const node = this.nodes[row][col];
-        // console.log(node);
+        console.log(event.offsetX);
+        console.log(node);
         // check if click is within start node, without this, anywhere the user clicks
         // the start/end node moves to that box.
         if (node == this.startNode) {
@@ -221,8 +221,9 @@ export class GridComponent implements OnInit {
   }
 
   private drawNode(node: Node, color: string) {
-    const x = node.col * this.cellWidth;
+    const x = (node.col * this.cellWidth);
     const y = node.row * this.cellHeight;
+    console.log(x,y)
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x, y, this.cellWidth, this.cellHeight);
   }

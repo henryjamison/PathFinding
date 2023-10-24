@@ -38,7 +38,7 @@ h1{
     font-size: 3em;
     text-align: center;
     font-weight: bold;
-    margin: 0px;
+    /* margin: 0px; */
 }
 
 button{
