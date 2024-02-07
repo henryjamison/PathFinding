@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:ital,wght@0,300;0,500;1,500&display=swap');
-:root{
-    font-family: 'Roboto';
+*{
+    font-family: 'Inter';
 }
 .container{
-    /* background-color: #cfcfcf; */
     color:white;
     margin: 0px;
     padding: 0px;
@@ -11,9 +9,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-left: 5%; */
-    /* margin-right: 5%; */
-    /* position: sticky; */
 }
 div{
     color: white;
@@ -30,7 +25,7 @@ a{
     font-size: 32px;
     border-radius: 4px;
     padding: 10px;
-
+    font-weight: 500;
 }
 p{
     color:black;
@@ -42,7 +37,6 @@ p{
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /* position: relative; */
 }
 
 @media screen and (max-width:500px){

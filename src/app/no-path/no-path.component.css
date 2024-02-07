@@ -1,3 +1,6 @@
+*{
+  font-family: 'Inter';
+}
 :host {
   position: fixed;
   top: 0;
@@ -10,13 +13,18 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999;
 }
-
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: white;
   padding: 20px;
   border-radius: 5px;
 }
 button {
   background-color: red;
+}
+.mat-mdc-button{
   color: white;
 }

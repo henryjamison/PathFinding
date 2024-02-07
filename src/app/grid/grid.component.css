@@ -1,3 +1,6 @@
+*{
+    font-family: 'Inter';
+}
 .container {
     display: flex;
     margin-left: 5%;
@@ -17,8 +20,6 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 900px;
-    /* margin-left: 5%; */
-    /* margin-right: 5%; */
 }
 .buttons {
     display: flex;
@@ -100,8 +101,7 @@ button {
     margin: 5px;
     font-size: 14px;
     height: auto;
-    font-family: 'Roboto';
-    font-weight: 1000;
+    font-weight: 500;
 }
 input {
     justify-content: center;
