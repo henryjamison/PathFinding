@@ -70,7 +70,7 @@ export class GridComponent implements OnInit {
       const containerHeight = this.canvas.nativeElement.parentElement.clientHeight;
       const containerWidth = this.canvas.nativeElement.parentElement.clientWidth;
       if (this.isMobileDevice()) {
-        this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 4.5);
+        this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 4);
         this.canvasWidth = Math.floor(containerWidth / this.cellWidth) * (this.cellWidth);
       }
       else {
