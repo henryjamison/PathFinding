@@ -70,7 +70,8 @@ export class GridComponent implements OnInit {
       const containerHeight = this.canvas.nativeElement.parentElement.clientHeight;
       const containerWidth = this.canvas.nativeElement.parentElement.clientWidth;
       if (this.isMobileDevice()) {
-        this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 8);
+        this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 4.5);
+        this.canvasWidth = Math.floor(containerWidth / this.cellWidth) * (this.cellWidth);
       }
       else {
         this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 3);
@@ -92,8 +93,25 @@ export class GridComponent implements OnInit {
       console.log(start,end);
       this.createEndNode(end);
       this.createStartNode(start);
+
     }
+    // window.addEventListener('resize', () => {
+    //   this.updateCanvasSize();
+    // });
   }
+
+  // updateCanvasSize() {
+  //   const containerHeight = this.canvas.nativeElement.parentElement!.clientHeight;
+  //   const containerWidth = this.canvas.nativeElement.parentElement!.clientWidth;
+  //   this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 3);
+  //   this.canvasWidth = Math.floor(containerWidth / this.cellWidth) * (this.cellWidth);
+  //   this.canvas.nativeElement.height = this.canvasHeight;
+  //   this.canvas.nativeElement.width = this.canvasWidth;
+  //   this.numRows = Math.floor(this.canvasHeight / this.cellHeight);
+  //   this.numCols = Math.floor(this.canvasWidth / this.cellWidth);
+  //   this.createGraph();
+  //   this.drawGraph();
+  // }
 
   createGraph() {
     for (let row = 0; row < this.numRows; row++) {
