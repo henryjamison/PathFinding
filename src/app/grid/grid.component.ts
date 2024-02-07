@@ -79,7 +79,7 @@ export class GridComponent implements OnInit {
       this.canvas.nativeElement.height = this.canvasHeight;
       this.canvas.nativeElement.width = this.canvasWidth;
       this.numRows = Math.floor(this.canvasHeight / this.cellHeight);
-      this.numCols = Math.floor(this.canvasWidth / this.cellWidth) + 2;
+      this.numCols = Math.floor(this.canvasWidth / this.cellWidth);
       // console.log(this.numRows,this.numCols);
       this.createGraph();
       this.drawGraph();
@@ -89,7 +89,7 @@ export class GridComponent implements OnInit {
       let endCol = Math.floor(Math.random() * this.numCols);
       let start = this.nodes[startRow][startCol];
       let end = this.nodes[endRow][endCol];
-      // console.log(start,end);
+      console.log(start,end);
       this.createEndNode(end);
       this.createStartNode(start);
     }
