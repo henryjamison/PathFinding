@@ -36,6 +36,7 @@ export class GridComponent implements OnInit {
   private cellWidth = 20;
   private cellHeight = 20;
   private canvasHeight:any;
+  private canvasWidth:any;
   private draggingNode: 'start' | 'end' | 'clear' | null = null;
   private isDrawing = false;
   private isDragging = false;
@@ -67,22 +68,28 @@ export class GridComponent implements OnInit {
       this.visitedNodeColorInput = document.getElementById('visited') as HTMLInputElement;
       this.pathColorInput = document.getElementById('Path') as HTMLInputElement;
       const containerHeight = this.canvas.nativeElement.parentElement.clientHeight;
+      const containerWidth = this.canvas.nativeElement.parentElement.clientWidth;
       if (this.isMobileDevice()) {
         this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 8);
       }
       else {
-        this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 4);
+        this.canvasHeight = Math.floor(containerHeight / this.cellHeight) * (this.cellHeight * 3);
+        this.canvasWidth = Math.floor(containerWidth / this.cellWidth) * (this.cellWidth);
       }
       this.canvas.nativeElement.height = this.canvasHeight;
+      this.canvas.nativeElement.width = this.canvasWidth;
       this.numRows = Math.floor(this.canvasHeight / this.cellHeight);
+      this.numCols = Math.floor(this.canvasWidth / this.cellWidth) + 2;
+      // console.log(this.numRows,this.numCols);
       this.createGraph();
       this.drawGraph();
       let startRow = Math.floor(Math.random() * this.numRows);
       let startCol = Math.floor(Math.random() * this.numCols);
-      let endRow = Math.floor(Math.random() * this.numCols);
+      let endRow = Math.floor(Math.random() * this.numRows);
       let endCol = Math.floor(Math.random() * this.numCols);
       let start = this.nodes[startRow][startCol];
       let end = this.nodes[endRow][endCol];
+      // console.log(start,end);
       this.createEndNode(end);
       this.createStartNode(start);
     }
@@ -129,8 +136,8 @@ export class GridComponent implements OnInit {
         const col = Math.floor(event.offsetX / this.cellWidth);
         const row = Math.floor(event.offsetY / this.cellHeight);
         const node = this.nodes[row][col];
-        console.log(event.offsetX);
-        console.log(node);
+        // console.log(event.offsetX);
+        // console.log(node);
         // check if click is within start node, without this, anywhere the user clicks
         // the start/end node moves to that box.
         if (node == this.startNode) {
@@ -223,7 +230,7 @@ export class GridComponent implements OnInit {
   private drawNode(node: Node, color: string) {
     const x = (node.col * this.cellWidth);
     const y = node.row * this.cellHeight;
-    console.log(x,y)
+    // console.log(x,y)
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x, y, this.cellWidth, this.cellHeight);
   }
