@@ -1,11 +1,12 @@
 .footer{
     margin-top: auto;
     background-color: black;
-    width: 100%;
+    width: 100vw;
     height: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow:hidden;
 }
 button{
     all: unset;

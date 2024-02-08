@@ -13,7 +13,6 @@
 div{
     color: white;
     margin: 10px;
-
 }
 a:hover{
     background-color: rgb(220, 220, 220);
@@ -41,6 +40,9 @@ p{
 
 @media screen and (max-width:512px){
     a{
-        font-size: 24px;
+        font-size: 22px;
+    }
+    div{
+        margin: 0px;
     }
 }
