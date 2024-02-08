@@ -90,7 +90,7 @@ export class GridComponent implements OnInit {
       let endCol = Math.floor(Math.random() * this.numCols);
       let start = this.nodes[startRow][startCol];
       let end = this.nodes[endRow][endCol];
-      console.log(start,end);
+      // console.log(start,end);
       this.createEndNode(end);
       this.createStartNode(start);
 
